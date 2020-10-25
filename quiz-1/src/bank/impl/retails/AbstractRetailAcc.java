@@ -1,22 +1,19 @@
-package bank.impl;
+package bank.impl.retails;
 
-import Domain.User;
 import bank.BankAcc;
 
 public abstract class AbstractRetailAcc implements BankAcc {
 
     String accNo;
-    User userDetails;
     Double balanceAcc;
 
-    public AbstractRetailAcc(String accNo, User userDetails,Double balanceAcc) {
+    public AbstractRetailAcc(String accNo,Double balanceAcc) {
         this.accNo = accNo;
-        this.userDetails = userDetails;
         this.balanceAcc = balanceAcc;
     }
 
     @Override
-    public abstract Double doWithdrawal(Double amount) ;
+    public abstract void doWithdrawal(Double amount) ;
 
     @Override
     public Double getAccBalance() {
@@ -24,7 +21,7 @@ public abstract class AbstractRetailAcc implements BankAcc {
     }
 
     @Override
-    public abstract Double doDeposit(Double amount) ;
+    public abstract void doDeposit(Double amount) ;
 
     public String getAccNo() {
         return accNo;
@@ -34,13 +31,6 @@ public abstract class AbstractRetailAcc implements BankAcc {
         this.accNo = accNo;
     }
 
-    public User getUserDetails() {
-        return userDetails;
-    }
-
-    public void setUserDetails(User userDetails) {
-        this.userDetails = userDetails;
-    }
 
     public Double getBalanceAcc() {
         return balanceAcc;

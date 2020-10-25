@@ -1,22 +1,29 @@
 package bank.impl.retails;
 
-import Domain.User;
-
 import java.math.BigDecimal;
 
-public class CurrentAccount extends AbstractRetailAcc{
-    public CurrentAccount(String accNo, User userDetails, Double balanceAcc) {
-        super(accNo, userDetails, balanceAcc);
+public class RetailCurrentAccount extends AbstractRetailAcc{
+
+    public RetailCurrentAccount(String accNo, Double balanceAcc) {
+        super(accNo, balanceAcc);
     }
 
     @Override
-    public Double doWithdrawal(Double amount) {
-        return this.balanceAcc - amount - extraCharges(amount);
+    public void doWithdrawal(Double amount) {
+        if(amount == 0 ){
+            //add uncheck exception if incase amount is zero
+            throw new RuntimeException("Cant withdraw with zero amount");
+        }
+        this.balanceAcc = this.balanceAcc - amount - extraCharges(amount);
     }
 
     @Override
-    public Double doDeposit(Double amount) {
-        return this.balanceAcc + amount + extraCharges(amount);
+    public void doDeposit(Double amount) {
+        if(amount == 0 ){
+            //add uncheck exception if incase amount is zero
+            throw new RuntimeException("Cant Deposit with zero amount");
+        }
+        this.balanceAcc = this.balanceAcc + amount + extraCharges(amount);
     }
 
     private Double extraCharges(Double amount) {
@@ -27,9 +34,8 @@ public class CurrentAccount extends AbstractRetailAcc{
 
     @Override
     public String toString() {
-        return "CurrentAccount{" +
+        return "Current Saving Account{" +
                 "accNo='" + accNo + '\'' +
-                ", userDetails=" + userDetails +
                 ", balanceAcc=" + balanceAcc +
                 ", Extra Charges= 0.012"+
                 '}';
